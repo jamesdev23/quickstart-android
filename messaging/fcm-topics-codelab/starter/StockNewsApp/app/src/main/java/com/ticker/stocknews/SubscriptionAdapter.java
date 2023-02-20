@@ -66,15 +66,27 @@ public class SubscriptionAdapter extends RecyclerView.Adapter<SubscriptionAdapte
       });
     }
 
-    void subscribeToStockCategory() {
-      // Making call to FCM for subscribing to the topic for {@link stockCategory}
-      // TODO: Topic subscribing call
-    }
+      void subscribeToStockCategory() {
+          // Making call to FCM for subscribing to the topic for stockCategory
+          FirebaseMessaging.getInstance().subscribeToTopic(stockCategory.getTopicName()).addOnSuccessListener(
+                  unused -> {
+                      // Subscribing action successful
+                      Log.i(TAG, "Subscribed to topic: " + stockCategory.getTopicName());
+                      Toast.makeText(itemView.getContext(), "Subscribed to " + stockCategory.getCategoryName(),
+                              Toast.LENGTH_SHORT).show();
+                  });
+      }
 
-    void unsubscribeFromStockCategory() {
-      // Making call to FCM for unsubscribing from the topic for {@link stockCategory}
-      // TODO: Topic unsubscribing call
-    }
+      void unsubscribeFromStockCategory() {
+          // Making call to FCM for unsubscribing from the topic for stockCategory
+          FirebaseMessaging.getInstance().unsubscribeFromTopic(stockCategory.getTopicName())
+                  .addOnSuccessListener(unused -> {
+                      // Unsubscribing action successful
+                      Log.i(TAG, "Unsubscribed from topic: " + stockCategory.getTopicName());
+                      Toast.makeText(itemView.getContext(), "Unsubscribed from " + stockCategory.getCategoryName(),
+                              Toast.LENGTH_SHORT).show();
+                  });
+      }
 
     void setData(StockCategory stockCategory) {
       this.stockCategory = stockCategory;
