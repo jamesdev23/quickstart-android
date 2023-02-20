@@ -25,25 +25,30 @@ public class FcmSubscriptionManager {
 
   private static void subscribeFcmRegistrationTokensToTopic() throws Exception {
     List<String> registrationTokens = Arrays
-        .asList("REPLACE_WITH_FCM_REGISTRATION_TOKEN"); // TODO: add FCM Registration Tokens to subscribe
-    String topicName = ""; // TODO: provide the Topic name you want to subscribe tokens to. Eg., /topics/Technology
+        .asList("cxxeYJOtQyK3V3_axivccv:APA91bG5fgqAVCeY71-mxStD-D5omUOOB5JKenqp6dqo5coZy9anBmoJxN8q4ryadgAFXtAuoy_NrjWr7BcolL9rIrxobnmZVttkrEcbEOlxCoFJr0KWxzVsdxe_4rcLFS7b_4wHQlsw"); // TODO: add FCM Registration Tokens to subscribe
+    String topicName = "/topics/Energy"; // TODO: provide the Topic name you want to subscribe tokens to. Eg., /topics/Technology
 
-    // TODO: implement topic subscription code
+      TopicManagementResponse response = FirebaseMessaging.getInstance().subscribeToTopic(
+              registrationTokens, topicName);
+
+      System.out.printf("Num tokens successfully subscribed %d", response.getSuccessCount());
   }
 
   private static void unsubscribeFcmRegistrationTokensFromTopic() throws Exception {
     List<String> registrationTokens = Arrays
-        .asList("REPLACE_WITH_FCM_REGISTRATION_TOKEN"); // TODO: add FCM Registration Tokens to unsubscribe
-    String topicName = ""; // TODO: provide the Topic name you want to unsubscribe tokens from. Eg., /topics/Technology
+        .asList("cxxeYJOtQyK3V3_axivccv:APA91bG5fgqAVCeY71-mxStD-D5omUOOB5JKenqp6dqo5coZy9anBmoJxN8q4ryadgAFXtAuoy_NrjWr7BcolL9rIrxobnmZVttkrEcbEOlxCoFJr0KWxzVsdxe_4rcLFS7b_4wHQlsw"); // TODO: add FCM Registration Tokens to unsubscribe
+    String topicName = "/topics/Technology"; // TODO: provide the Topic name you want to unsubscribe tokens from. Eg., /topics/Technology
 
-    // TODO: implement topic unsubscription code
+      TopicManagementResponse response = FirebaseMessaging.getInstance().unsubscribeFromTopic(
+              registrationTokens, topicName);
+      System.out.printf("Num tokens successfully unsubscribed %d", response.getSuccessCount());
   }
 
   public static void main(final String[] args) throws Exception {
     initFirebaseSDK();
 
     // Note: Enable the call you want to execute. Disable others.
-    // subscribeFcmRegistrationTokensToTopic();
-    // unsubscribeFcmRegistrationTokensFromTopic();
+//     subscribeFcmRegistrationTokensToTopic();
+     unsubscribeFcmRegistrationTokensFromTopic();
   }
 }

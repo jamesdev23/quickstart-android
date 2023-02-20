@@ -23,23 +23,42 @@ public class FcmSender {
   }
 
   private static void sendMessageToFcmTopicCondition() throws Exception {
-    String topicCondition = ""; // TODO: Provide the Topic Condition you want to send to. Eg., 'Technology' in topics || 'Automotive' in topics
+    String topicCondition = "'Technology' in topics && 'Automotive'";
 
-    // TODO: Implement FCM Topic Condition send call
+      Message message = Message.builder()
+              .putData("FOOCAR", "$500")
+              .setNotification(
+                      Notification.builder()
+                              .setTitle("Foo Car shows strong Q2 results")
+                              .setBody("Foo Car crosses 1B miles. Stocks rally.")
+                              .build())
+              .setCondition(topicCondition)
+              .build();
+
+    FirebaseMessaging.getInstance().send(message);
 
     System.out.printf("Message to FCM Topic Condition %s sent successfully!!", topicCondition);
   }
 
   private static void sendMessageToFcmTopic() throws Exception {
-    String topicName = ""; // TODO: Provide the Topic you want to send to -> /topics/<Topic Name>. Eg., /topics/Technology
+    String topicName = "Energy"; // TODO: Provide the Topic you want to send to -> /topics/<Topic Name>. Eg., /topics/Technology
 
-    // TODO: Implement FCM Topic send call
+    Message message = Message.builder()
+            .putData("FOOTECH", "$1000")
+            .setNotification(
+                    Notification.builder()
+                            .setTitle("Investor confidence in Tech Stocks growing")
+                            .setBody("Foo Tech leading the way in stock growth for Tech sector.")
+                            .build())
+            .setTopic(topicName).build();
+
+    FirebaseMessaging.getInstance().send(message);
 
     System.out.printf("Message to FCM Topic %s sent successfully!!", topicName);
   }
 
   private static void sendMessageToFcmRegistrationToken() throws Exception {
-    String registrationToken = ""; // TODO: Add FCM Registration Token for target app instance.
+    String registrationToken = "cxxeYJOtQyK3V3_axivccv:APA91bG5fgqAVCeY71-mxStD-D5omUOOB5JKenqp6dqo5coZy9anBmoJxN8q4ryadgAFXtAuoy_NrjWr7BcolL9rIrxobnmZVttkrEcbEOlxCoFJr0KWxzVsdxe_4rcLFS7b_4wHQlsw";
 
     Message message = Message.builder()
         .putData("TUVX", "$50")
@@ -61,8 +80,8 @@ public class FcmSender {
     initFirebaseSDK();
 
     // Note: Enable the call you want to execute. Disable others.
-    sendMessageToFcmRegistrationToken();
-    // sendMessageToFcmTopic();
-    // sendMessageToFcmTopicCondition();
+//    sendMessageToFcmRegistrationToken();
+     sendMessageToFcmTopic();
+//      sendMessageToFcmTopicCondition();
   }
 }
